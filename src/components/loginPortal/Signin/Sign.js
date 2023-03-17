@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import './Sign.css'
-import { Link ,useNavigate , useHref} from 'react-router-dom';
+import { Link, useNavigate, useHref } from 'react-router-dom';
 import axios from 'axios'
+import Navbar from '../../navbar/Navbar';
 export default function Sign() {
 
 
@@ -9,10 +10,11 @@ export default function Sign() {
   const navi = useNavigate();
   const [ShowPass, setShowPass] = useState("password");
   const [PassState, setPass] = useState("Show");
-  const[name , setName] = useState("")
-  const[email , setEmail] = useState("")
-  const[passUser , setPassUser] = useState("")
-  const[mes , setMes] = useState({})
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [passUser, setPassUser] = useState("")
+
+  const [rePass, setRePass] = useState("")
 
   const handlePass = () => {
     if (ShowPass === "text") {
@@ -29,75 +31,78 @@ export default function Sign() {
   }
 
 
-  const handleSubmit = async (  ) => {
+  const handleSignUp = async () => {
+    try {
 
-    
-
-    try{
-
-        await axios.post("http://localhost:8000/signup" , {
-          name , email, passUser
-        }).then((res)=>{
-          console.log(res)
-
-        })
-    
-
-    }catch(e){
+      await axios.post("http://localhost:8000/signup", {
+        name, email, passUser
+      }).then((res) => {
+        console.log(res.data.message)
+      })
+    } catch (e) {
       console.log(e)
-
     }
-
-  
   }
+
   return (
-    <div className='container'>
-  
-      <h1>My <span>Query</span></h1>
-      <div className='welcome'>
-        <h2>Greetings , Signup Below</h2>
-      </div>
-      <div className='form-container'>
-        <div className='left'>
-          hey
+
+    <>
+      <div className='main'>
+        <nav>
+          <Navbar />
+        </nav>
+        <div className='title'>
+          <h1>Welcome!</h1>
         </div>
-        <div className='right'>
+
+        <div className='form-container'>
+
+
           <h2>Signup</h2>
-         <form>
-          <span id='inputs'>
-              <label>Name </label>
-              <input type="text" className='inputs' placeholder='Enter Name' onChange={
-                (e)=>{
-                  setName(e.target.value)
-                }
-              }></input>
-            </span>
-            <span id='inputs'>
-              <label>Email </label>
-              <input type="email" className='inputs' placeholder='Enter Email' onChange={
-                (e)=>{
-                  setEmail(e.target.value)
-                }
-              }></input>
-            </span>
-            < span id='inputs'>
-              <label>Pass </label>
-              <input type={ShowPass} className="inputs"  autocomplete="on" placeholder='Enter Password' onChange={
-                (e)=>{
-                  setPassUser(e.target.value)
-                }
-              }></input>
-              <button type='button' onClick={handlePass} className="show">{PassState}</button>
-            </span>
-          
-            <button type='submit' onClick={handleSubmit} className="btn btn1"><Link to="/">Signup</Link></button>
-            </form>
-       
+
+          <span >
+            <label>Name </label>
+            <input type="text" className='inputs' placeholder='Enter Name' onChange={
+              (e) => {
+                setName(e.target.value)
+              }
+            }></input>
+          </span>
+          <span >
+            <label>Email </label>
+            <input type="email" className='inputs' placeholder='Enter Email' onChange={
+              (e) => {
+                setEmail(e.target.value)
+              }
+            }></input>
+          </span>
+          < span>
+            <label>Pass </label>
+            <input type={ShowPass} className="inputs" autocomplete="on" placeholder='Enter Password' onChange={
+              (e) => {
+                setPassUser(e.target.value)
+              }
+            }></input>
+            {/* <button type='button' onClick={handlePass} className="show">{PassState}</button> */}
+          </span>
+          < span>
+            <label>Re-Enter Pass </label>
+            <input type={ShowPass} className="inputs" autoComplete="on" placeholder='Re-Enter Password' onChange={
+              (e) => {
+                setRePass(e.target.value)
+              }
+            }></input>
+            {/* <button type='button' onClick={handlePass} className="show">{PassState}</button> */}
+          </span>
+
+          <button type='submit' onClick={handleSignUp} className="btn btn1"><Link to="/">Signup</Link></button>
+
+
 
         </div>
-
       </div>
 
-    </div>
+    </>
+
   )
 }

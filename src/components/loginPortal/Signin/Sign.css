@@ -1,3 +1,13 @@
 .btn1{
     margin-top: 20px;
 }
+@import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
+
+.title>h1{
+    font-family: 'Sono', sans-serif;
+    font-size: 100px;
+    letter-spacing: 1px;
+    position: relative;
+    top: 80px;
+    color: #2249E9;
+}

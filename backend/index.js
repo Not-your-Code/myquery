@@ -29,16 +29,19 @@ const userSchema = new mongoose.Schema({
      }
   
   })
+
+//   user model made
  
  const User = new mongoose.model("user" , userSchema)
 
+// connections
 mongoose.connect('mongodb://127.0.0.1:27017/myquery').then(() => console.log("connected")).catch((error) => {
    console.log(error)
 })
 
-app.post("/signup" ,async(req , res)=>{
 
-   
+//signup code
+app.post("/signup" ,async(req , res)=>{
     async function execute(){
         try{
             const{email , passUser , name } = req.body
@@ -46,6 +49,7 @@ app.post("/signup" ,async(req , res)=>{
     
             if(!data){
                 const user = new User({
+                    
                     email:email,
                     password:passUser,
                     name:name,
@@ -61,34 +65,33 @@ app.post("/signup" ,async(req , res)=>{
         }catch(e){}
     }
     
-    execute();
-        // const {email , pass } = req.body;
-    
-    
-        // const data = {
-        //     email : email,
-        //     password : pass
-        // }
-        // try{
-    
-        //     const check = await user.findOne({email:email})
-    
-        //     if(check){
-        //         res.send({message :"exists"})
-        //     }else{
-        //         user.save().then(() => {
-        //             console.log("done")
-        //          }).catch((e) => {
-        //             console.log("!done")
-        //          });
-        //     }
-    
-        // }catch(e){
-        //     res.json(e)
-    
-        // }
-    })
+    execute()
+ })
 
+ //login code 
+ app.post("/login" , async(req,res)=>{
+   
+   async function execute(){
+        try{
+            const{email , passUser} = req.body
+
+            const check = await User.findOne({email:email,password:passUser})
+
+            if(check){
+                res.send("logged in ")
+                console.log("logged in")
+            }else{
+                res.send({message:"Incorrect Details"})
+                console.log( " !! done")
+            }
+        }catch(e){
+            res.json(e)
+    
+        }
+    }
+
+    execute();
+ })
 
 app.listen(8000 , ()=>{
     console.log("started")
