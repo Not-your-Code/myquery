@@ -11,3 +11,32 @@
     top: 80px;
     color: #2249E9;
 }
+.message{
+   
+    position: absolute;
+    margin: auto;
+    background-color: rgba(32, 32, 32 , .8);
+    right: 0;
+    left: 0;
+    bottom: 38px;
+    width: 300px;
+    font-family: 'Cabin', sans-serif;
+    height: 46px;
+    text-align: center;
+    padding-top: 9px;
+    border-radius: 10px;
+    color: white;
+}
+
+
+h6{
+    font-family: 'Cabin', sans-serif;
+    margin-top: 4px;
+    margin-left: 4px;
+    color: rgb(163, 59, 59);
+    font-size: 15px;
+}
+
+.title>h1{
+    left: 59px;
+}

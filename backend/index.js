@@ -78,11 +78,11 @@ app.post("/signup" ,async(req , res)=>{
             const check = await User.findOne({email:email,password:passUser})
 
             if(check){
-                res.send("logged in ")
-                console.log("logged in")
+               res.send({message :"logged in"})
+          
             }else{
-                res.send({message:"Incorrect Details"})
-                console.log( " !! done")
+                res.send({message :"Incorrect Details"})
+               
             }
         }catch(e){
             res.json(e)
@@ -91,7 +91,7 @@ app.post("/signup" ,async(req , res)=>{
     }
 
     execute();
- })
+     })
 
 app.listen(8000 , ()=>{
     console.log("started")

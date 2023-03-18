@@ -55,14 +55,15 @@ span>input{
    
     position: absolute;
     margin: auto;
-    background-color: rgb(29, 29, 29);
+    background-color: rgba(32, 32, 32 , .8);
     right: 0;
     left: 0;
     bottom: 38px;
     width: 300px;
+    font-family: 'Cabin', sans-serif;
     height: 46px;
     text-align: center;
-    padding-top: 7px;
+    padding-top: 9px;
     border-radius: 10px;
     color: white;
 }
@@ -75,5 +76,6 @@ span>input{
     letter-spacing: 1px;
     position: relative;
     top: 80px;
+    left: 26px;
     color: #2249E9;
 }
