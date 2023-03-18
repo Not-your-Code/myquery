@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Login.css'
 import { Link } from 'react-router-dom';
-import Navbar from '../../navbar/Navbar';
+
 import axios from 'axios';
 
 
@@ -9,14 +9,11 @@ export default function Login(props) {
     const [ShowPass, setShowPass] = useState("password");
     const [PassState, setPass] = useState("Show");
     const [message, setMessage] = useState('');
-    const [messVisi, setMessVisi] = useState("hidden");
-    const [email, setEmail] = useState("")
+    const [name, setName] = useState("")
     const [passUser, setPassUser] = useState("")
-    const[res , setRes] = useState("")
+    const [res , setRes] = useState("")
+
   
-
-    
-
     const handlePass = () => {
         if (ShowPass === "text") {
             setShowPass("password")
@@ -28,18 +25,10 @@ export default function Login(props) {
     }
 
 
-
-    const ErrorStyle = {
-
-        color: 'red',
-    };
-
-
     const handleLogin = async () => {
-
         try {
             await axios.post('http://localhost:8000/login', {
-                email, passUser
+                name, passUser
             }).then((res) => {
                 if (res.data.message === "Incorrect Details") {
                     setMessage(res.data.message);
@@ -49,6 +38,8 @@ export default function Login(props) {
                 } else if (res.data.message === "logged in") {
                     setMessage(res.data.message);
                     setRes(true)
+                    props.setUser(name);
+                    props.setLoggedIn(true)
                     console.log(res.data.message)
                 }
 
@@ -61,21 +52,14 @@ export default function Login(props) {
     return (
 
         <>
-
-            <div className='main'>
-                <nav>
-                    <Navbar />
-                </nav>
-                <div className='title'>
-                    <h1>Welcome!</h1>
-                </div>
+          
                 <div className='form-container'>
                     <h2>Login</h2>
                     <span>
-                        <label>Email </label>
-                        <input type="email" placeholder='Enter Email' onChange={
+                        <label>Username </label>
+                        <input type="text" placeholder='Enter Username' onChange={
                             (e) => {
-                                setEmail(e.target.value)
+                                setName(e.target.value)
                             }
                         }></input>
                     </span>
@@ -96,7 +80,7 @@ export default function Login(props) {
                 {res && <div className='message' >
                     <h5>{message}</h5>
                 </div>}
-            </div>
+           
 
         </>
     )

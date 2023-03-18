@@ -12,8 +12,7 @@ export default function Sign() {
   const [PassState, setPass] = useState("Show");
   const[res , setRes] = useState("")
   const[message , setMessage] = useState("")
-  const [shouldRedirect, setShouldRedirect] = useState(false);
-  const[IsError , setIsError] = useState(true);
+
   const [Signed , setSigned] = useState(false);
   //signup fields
   const [name, setName] = useState("")
@@ -26,7 +25,9 @@ export default function Sign() {
   const [validPass, setValidPass] = useState(true)
   const [validRePass, setValidRePass] = useState(true)
 
-
+//exists
+const [ExistName , setExistName] = useState("");
+const [ExistEmail , setExistEmail] = useState("");
 
   //will work later on
   const handlePass = () => {
@@ -46,14 +47,31 @@ export default function Sign() {
         await axios.post("http://localhost:8000/signup", { name, email, passUser }).then((res) => {
           console.log(res.data.message)
           // setShouldRedirect(true)
-          setRes(true)
-          setSigned(true)
+         
+          if(res.data.message === "Email Already Exists" ){
+
+             setSigned(false)
+             setExistName(null)
+            setExistEmail(res.data.message)
+
+          }else if( res.data.message === "Name Already Exists"){
+            setSigned(false)
+            setExistName(res.data.message)
+            setExistEmail(null)
+          }else{
+            setRes(true)
+            setSigned(true)
+            setExistName(null)
+            
+            setExistEmail(null)
+          }
+         
         })
       } catch (e) {
         console.log(e)
       }
     } else {
-      setShouldRedirect(false)
+   
       setRes(true)
       setMessage("Validation Failed , Try Again !")
       console.log("Validation Failed , Try Again !")
@@ -76,8 +94,8 @@ export default function Sign() {
         <div className='form-container'>
           <h2>Signup</h2>
           <span >
-            <label>Name </label>
-            <input type="text" className='inputs' placeholder='Enter Name' onChange={
+            <label>Username </label>
+            <input type="text" className='inputs' placeholder='Enter Username' onChange={
               (e) => {
                 setName(e.target.value)
                 setValidName(
@@ -86,7 +104,8 @@ export default function Sign() {
               }
             }></input>
             <label >
-              {!validName && <h6>Should Have Upper and lowerCase and No digits</h6>}
+            {!validName ? <h6>Should Have Upper and lowerCase and No digits</h6>: ExistName ? <h6>{ExistName}</h6>:""}
+              {/* {!validName && <h6>Should Have Upper and lowerCase and No digits</h6>} */}
             </label>
           </span>
           <span >
@@ -100,12 +119,13 @@ export default function Sign() {
               }
             }></input>
             <label >
-              {!validEmail && <h6>enter a valid email </h6>}
+              {/* {!validEmail || ExistEmail && <h6>{ExistEmail}</h6>} */}
+              {!validEmail ? <h6>Enter A valid Email</h6>: ExistEmail ? <h6>{ExistEmail}</h6>:""}
             </label>
           </span>
           < span>
             <label>Pass </label>
-            <input type={ShowPass} className="inputs" autocomplete="on" placeholder='Enter Password' onChange={
+            <input type={ShowPass} className="inputs"  placeholder='Enter Password' onChange={
               (e) => {
                 setPassUser(e.target.value)
                 setValidPass(
@@ -119,7 +139,7 @@ export default function Sign() {
           </span>
           < span>
             <label>Re-Enter Pass </label>
-            <input type={ShowPass} className="inputs" autoComplete="on" placeholder='Re-Enter Password' onChange={
+            <input type={ShowPass} className="inputs"  placeholder='Re-Enter Password' onChange={
               (e) => {
                 setRePass(e.target.value)
                 if (e.target.value === passUser) {

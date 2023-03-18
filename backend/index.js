@@ -45,9 +45,9 @@ app.post("/signup" ,async(req , res)=>{
     async function execute(){
         try{
             const{email , passUser , name } = req.body
-            const data = await User.findOne({email:email})
-    
-            if(!data){
+            const CheckEmail = await User.findOne({email:email , })
+            const CheckName = await User.findOne({name :name })
+            if(!CheckEmail && !CheckName ){
                 const user = new User({
                     
                     email:email,
@@ -61,6 +61,13 @@ app.post("/signup" ,async(req , res)=>{
                     console.log('error' , e.message)
                 })
             }
+
+            if(CheckEmail){
+                res.send({message:"Email Already Exists"})
+            }
+            if(CheckName){
+                     res.send({message:"Name Already Exists"})
+            }
     
         }catch(e){}
     }
@@ -73,9 +80,9 @@ app.post("/signup" ,async(req , res)=>{
    
    async function execute(){
         try{
-            const{email , passUser} = req.body
+            const{name , passUser} = req.body
 
-            const check = await User.findOne({email:email,password:passUser})
+            const check = await User.findOne({name:name,password:passUser})
 
             if(check){
                res.send({message :"logged in"})

@@ -1,19 +1,31 @@
 import React,{useState} from 'react'
 import './Home.css'
 import Login from '../loginPortal/Login/Login'
-import Sign from '../loginPortal/Signin/Sign'
-import Navbar from '../navbar/Navbar'
 
+import Navbar from '../navbar/Navbar'
+import Main from '../Main/Main'
 export default function Home() {
-  const[signUp , SetSignup] = useState(true)
+  const[loggedIn , setLoggedIn] = useState(false)
+  const [User , setUser] = useState(null)
   
   return (
     <div className='main'>
       <nav>
-        <Navbar/>
+        <Navbar userName={User} />
       </nav>
-     <div className='title'>
-      <h1>Welcome!</h1>
+      
+     <div>
+      {loggedIn ? 
+      <Main /> :
+      (   <><div className='title'>
+            <h1>Login Below !</h1>
+          </div><div>
+              <Login setLoggedIn={setLoggedIn} setUser={setUser}/>
+            </div></>
+        
+      )
+      }
+      
      </div>
    
   
