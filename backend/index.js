@@ -7,7 +7,7 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
-
+const { v4: uuidv4 } = require('uuid')
 const app = express()
 
 app.use(express.json())
@@ -75,21 +75,22 @@ app.post("/signup" ,async(req , res)=>{
     execute()
  })
 
+
+
  //login code 
  app.post("/login" , async(req,res)=>{
    
    async function execute(){
         try{
             const{name , passUser} = req.body
-
             const check = await User.findOne({name:name,password:passUser})
-
             if(check){
-               res.send({message :"logged in"})
-          
+
+               const sessionId = uuidv4(); 
+               res.json({success :true , sessionId:sessionId})
+
             }else{
-                res.send({message :"Incorrect Details"})
-               
+                res.json({success :false})
             }
         }catch(e){
             res.json(e)

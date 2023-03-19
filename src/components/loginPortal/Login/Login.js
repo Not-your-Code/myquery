@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import './Login.css'
 import { Link } from 'react-router-dom';
-
+import Cookies from 'js-cookie';
 import axios from 'axios';
 
 
@@ -12,7 +12,7 @@ export default function Login(props) {
     const [name, setName] = useState("")
     const [passUser, setPassUser] = useState("")
     const [res , setRes] = useState("")
-
+    const [session , setSession] = useState(null)
   
     const handlePass = () => {
         if (ShowPass === "text") {
@@ -25,22 +25,45 @@ export default function Login(props) {
     }
 
 
+   const  setisLoggedIn=()=>{
+      
+
+       if(Cookies.get('sessionId') != null){
+       
+       props.setLoggedIn(true)
+      props.setUser(Cookies.get('user'));
+       }else{
+     console.log("no session")
+       }
+       
+    }
+
+useEffect(()=>{
+    setisLoggedIn();
+}, [])
+
     const handleLogin = async () => {
         try {
             await axios.post('http://localhost:8000/login', {
                 name, passUser
             }).then((res) => {
-                if (res.data.message === "Incorrect Details") {
-                    setMessage(res.data.message);
+                if (res.data.success) {
+                    console.log(res.data.success)
+                    Cookies.set('sessionId' , res.data.sessionId , {expires:100})
+                    Cookies.set('user' , name , {expires:100})
+                   setisLoggedIn();
+              
+                //   console.log(res.data.sessionId)
+              
+                 
+                } else  {
+                  
+                    setMessage("Incorrect Username Or Password");
                     setRes(true)
-                    console.log(res.data.message)
-
-                } else if (res.data.message === "logged in") {
-                    setMessage(res.data.message);
-                    setRes(true)
-                    props.setUser(name);
-                    props.setLoggedIn(true)
-                    console.log(res.data.message)
+                    // console.log(res.data.success)
+                   
+                 
+                
                 }
 
             })
@@ -56,6 +79,7 @@ export default function Login(props) {
                 <div className='form-container'>
                     <h2>Login</h2>
                     <span>
+                        {session}
                         <label>Username </label>
                         <input type="text" placeholder='Enter Username' onChange={
                             (e) => {
