@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-weight: bold;
+  background-image: url("./components/assests/back.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+

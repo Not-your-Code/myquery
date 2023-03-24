@@ -12,7 +12,7 @@ export default function User(props) {
                 </div><div className='menu'>
                  <ul className='userlist'>
                     <li>
-                        <img src={require('./assets/icons/user.png')} className="logoUser"/><Link to="/"  className='userLink'>My profile</Link>
+                        <img src={require('./assets/icons/user.png')} className="logoUser"/><Link  to="/"  onClick={()=> props.setProfile(!props.profile)}className='userLink'>My profile</Link>
                     </li>
                     <li>
                         <img src={require('./assets/icons/question.png')}className="logoUser" /><Link to="/" className='userLink'>Add a Question</Link>

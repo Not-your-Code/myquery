@@ -15,31 +15,36 @@ export default function Navbar(props) {
         </div>
         <div className='LeftNav'>
           <ul className='items'>
-            <li >
-              About
-            </li>
-            <li>
-              Contact
-            </li>
-            <li className='login'>
+          
+            <li className='login  '>
               {
                 props.userName ?
                   (
                     <>
                       <li >
-                        <button onClick={() => {setClicked(!clicked)}}>
+                        <button  className="userPro" onClick={() => {setClicked(!clicked)}}>
                            <img src={require('./avatar.png')} />
                         </button> 
                       </li>
-                      {clicked ? <User user={props.userName} /> : ""}
+                      {clicked ? <User user={props.userName} setProfile={props.setProfile} profile={props.profile}/> : ""}
                     </>
                   )
 
 
 
-                  : <Link to="/"> Login</Link>
+                  :  <button className="navbar-btn" ><Link to="/"> Login</Link></button>
               }
 
+            </li>
+            <li >
+            {
+                props.userName ?
+                 ""
+
+
+                  :   <button className="navbar-btn" ><Link to="/signup" >Signup</Link></button>
+              }
+             
             </li>
           </ul>
         </div>

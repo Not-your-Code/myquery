@@ -7,22 +7,20 @@ import Main from '../Main/Main'
 export default function Home() {
   const[loggedIn , setLoggedIn] = useState(false)
   const [User , setUser] = useState(null)
+  const[accessProfile ,setProfile]  = useState(false)
   
   return (
     <div className='main'>
       <nav>
-        <Navbar userName={User} />
+        <Navbar userName={User} setProfile={setProfile} profile={accessProfile}/>
       </nav>
       
      <div>
       {loggedIn ? 
-      <Main /> :
-      (   <><div className='title'>
-            <h1>Login Below !</h1>
-          </div><div>
-              <Login setLoggedIn={setLoggedIn} setUser={setUser}/>
+      <Main ProfileAccess = {accessProfile} /> :
+      (   <><div>
+              <Login setLoggedIn={setLoggedIn} setUser={setUser} />
             </div></>
-        
       )
       }
       

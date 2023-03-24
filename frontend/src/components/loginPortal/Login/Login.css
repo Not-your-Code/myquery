@@ -12,12 +12,12 @@
     margin: auto;
     position: relative;
     top: 120px;
-    background-color: #343434;
-    color: white;
+  background-color: rgb(224, 224, 224);
+    color: black;
 }
 
 .btn{
-  color: white;
+  color: black;
 }
 
 
@@ -78,4 +78,27 @@ span>input{
     top: 80px;
     left: 26px;
     color: #2249E9;
+}
+
+
+
+.title>p{
+    color: rgba(0,0,0,.6);
+    
+   
+}
+
+.title>h2{
+    text-align: center;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+
+.title{
+
+  height: 100px;  
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }

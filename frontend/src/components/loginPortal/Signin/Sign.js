@@ -88,11 +88,12 @@ const [ExistEmail , setExistEmail] = useState("");
         <nav>
           <Navbar />
         </nav>
-        <div className='title'>
-          <h1>SignUp Below !</h1>
-        </div>
+     
         <div className='form-container'>
-          <h2>Signup</h2>
+        <div className='title'>
+                    <h2 >Agent Signup </h2>
+                    <p className='sub'>Hey ! Signup Below to proceed</p>
+                    </div>
           <span >
             <label>Username </label>
             <input type="text" className='inputs' placeholder='Enter Username' onChange={

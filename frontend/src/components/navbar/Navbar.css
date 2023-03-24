@@ -3,7 +3,7 @@
 
 nav{
     width: 100vw;
-   background-color: rgb(238, 238, 238);
+ 
    border-radius: 20px;
     display: flex ;
     justify-content: space-between;
@@ -22,27 +22,35 @@ ul{
 }
 
 .LeftNav{
-     width: 30%;
+     width: 20%;
+     justify-content: space-around;
+     align-items: center;
       
 }
 
 ul>li{
     list-style-type: none;
-    font-size: 15px;;
+    font-size: 20px;;
     font-family: 'Noto Sans', sans-serif;
+
     cursor: pointer;
-    color: rgb(48, 48, 51);
+  
 }
 
-.login{
-    color: rgb(46, 119, 255);
-}
 
+.navbar-btn{
+    color:white;
+    border: none;
+    border-radius: 16px;
+    padding: 5px 9px 5px 9px;
+
+}
 .rightNav{
  
     margin-left: 30px;
    
-    color: rgb(12, 97, 255);
+    color: black;
+  
    font-family: 'Noto Sans', sans-serif;
    
 }
@@ -56,7 +64,11 @@ img{
     width: 40px;
 }
 
-button{
-    border: none;
-}
 
+
+.userPro{
+    border: none;
+    position: relative;
+    background-color: transparent;
+    left: 110px;
+}

@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
 
 //   user model made
  
- const User = new mongoose.model("user" , userSchema)
+ const User = new mongoose.model("User" , userSchema , "users")
 
 // connections
 mongoose.connect('mongodb://127.0.0.1:27017/myquery').then(() => console.log("connected")).catch((error) => {
