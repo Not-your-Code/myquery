@@ -11,7 +11,7 @@ export default function Navbar(props) {
         <div className='rightNav'>
 
 
-          <h2>My Query</h2>
+          <h2>QueryHere</h2>
         </div>
         <div className='LeftNav'>
           <ul className='items'>
@@ -21,18 +21,18 @@ export default function Navbar(props) {
                 props.userName ?
                   (
                     <>
-                      <li >
+                    
                         <button  className="userPro" onClick={() => {setClicked(!clicked)}}>
                            <img src={require('./avatar.png')} />
                         </button> 
-                      </li>
+                     
                       {clicked ? <User user={props.userName} setProfile={props.setProfile} profile={props.profile}/> : ""}
                     </>
                   )
 
 
 
-                  :  <button className="navbar-btn" ><Link to="/"> Login</Link></button>
+                  :  <button className="navbar-btn" ><Link style={{color:"black"}}to="/"> Login</Link></button>
               }
 
             </li>
@@ -40,9 +40,7 @@ export default function Navbar(props) {
             {
                 props.userName ?
                  ""
-
-
-                  :   <button className="navbar-btn" ><Link to="/signup" >Signup</Link></button>
+                  :   <button className="navbar-btn" ><Link style={{color:"black" , filter: "drop-shadow(5px 5px 10px #000)"}} to="/signup" >Signup</Link></button>
               }
              
             </li>

@@ -5,7 +5,7 @@
     height: 250px;
     width: 200px;
     border-radius: 20px;
-    background-color: rgba(204, 204, 204, 1);
+    background-color: rgb(224, 224, 224);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,7 +24,10 @@
     letter-spacing: 2px     ;
 }
 
-
+.user>h3 ,.role{
+    position: relative;
+    top: 12px;
+}
 .role{
     font-size: 18px;
     color: #999999;

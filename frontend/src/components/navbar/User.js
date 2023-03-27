@@ -6,9 +6,10 @@ export default function User(props) {
     return (
         <div className='userProfile'>
             <div className='user'>
+           
                 <h3>{props.user.charAt(0).toUpperCase()+props.user.slice(1) }</h3>
                 <span className='role'>User</span>
-                
+           
                 </div><div className='menu'>
                  <ul className='userlist'>
                     <li>

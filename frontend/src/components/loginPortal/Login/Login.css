@@ -12,6 +12,7 @@
     margin: auto;
     position: relative;
     top: 120px;
+    filter: drop-shadow(5px 5px 41px #000);
   background-color: rgb(224, 224, 224);
     color: black;
 }
@@ -25,6 +26,7 @@
     font-family: 'Sono', sans-serif;
     font-size: 50px;
     cursor: pointer;
+
 }
 
 span{
@@ -33,13 +35,14 @@ span{
     align-items: start;
     justify-content: center;
     position: relative;
-    
+    margin-bottom: 30px;
 }
 span>label{
     font-family: 'Cabin', sans-serif;
     font-weight: lighter;
     letter-spacing: 2px;
     margin-bottom: 2px;
+    margin-bottom: 5px;
 }
 
 span>input{

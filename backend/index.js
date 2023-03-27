@@ -76,7 +76,21 @@ app.post("/signup" ,async(req , res)=>{
  })
 
 
+app.post("/profile" , async (req, res)=>{
 
+    async function execute(){
+        try{
+            const {name} = req.body;
+            const getProfileDetail = await User.findOne({name:name})
+
+            if(getProfileDetail){
+               res.json(getProfileDetail)
+            }
+
+        } catch(e){ console.log(e)}
+    }
+    execute()
+})
  //login code 
  app.post("/login" , async(req,res)=>{
    
@@ -86,8 +100,9 @@ app.post("/signup" ,async(req , res)=>{
             const check = await User.findOne({name:name,password:passUser})
             if(check){
 
-               const sessionId = uuidv4(); 
-               res.json({success :true , sessionId:sessionId})
+               const sessionId = uuidv4();
+             
+               res.json({success :true , sessionId:sessionId, id: check._id } )
 
             }else{
                 res.json({success :false})

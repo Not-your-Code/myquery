@@ -32,8 +32,6 @@ export default function Login(props) {
        
        props.setLoggedIn(true)
       props.setUser(Cookies.get('user'));
-       }else{
-     console.log("no session")
        }
        
     }
@@ -49,8 +47,10 @@ useEffect(()=>{
             }).then((res) => {
                 if (res.data.success) {
                     console.log(res.data.success)
+                  
                     Cookies.set('sessionId' , res.data.sessionId , {expires:100})
                     Cookies.set('user' , name , {expires:100})
+                   
                    setisLoggedIn();
               
                 //   console.log(res.data.sessionId)
@@ -81,8 +81,9 @@ useEffect(()=>{
                     <h2 >Agent Login </h2>
                     <p className='sub'>Hey ! Login Below to proceed</p>
                     </div>
+                    <form>
                     <span>
-                        {session}
+                       
                         <label>Username </label>
                         <input type="text" placeholder='Enter Username' onChange={
                             (e) => {
@@ -92,12 +93,13 @@ useEffect(()=>{
                     </span>
                     <span>
                         <label>Pass </label>
-                        <input type={ShowPass} placeholder='Enter Password' onChange={
+                        <input type={ShowPass} autoComplete="" placeholder='Enter Password' onChange={
                             (e) => {
                                 setPassUser(e.target.value)
                             }
                         }></input>
                     </span>
+                    </form>
                     {/* <button type='button' onClick={handlePass} className="show">{PassState}</button> */}
                     <button type='submit' onClick={handleLogin} className="btn">Login</button>
                     <div className='bottom'>

@@ -94,6 +94,8 @@ const [ExistEmail , setExistEmail] = useState("");
                     <h2 >Agent Signup </h2>
                     <p className='sub'>Hey ! Signup Below to proceed</p>
                     </div>
+
+        <form>
           <span >
             <label>Username </label>
             <input type="text" className='inputs' placeholder='Enter Username' onChange={
@@ -126,7 +128,7 @@ const [ExistEmail , setExistEmail] = useState("");
           </span>
           < span>
             <label>Pass </label>
-            <input type={ShowPass} className="inputs"  placeholder='Enter Password' onChange={
+            <input type={ShowPass} className="inputs" autoComplete='' placeholder='Enter Password' onChange={
               (e) => {
                 setPassUser(e.target.value)
                 setValidPass(
@@ -140,7 +142,7 @@ const [ExistEmail , setExistEmail] = useState("");
           </span>
           < span>
             <label>Re-Enter Pass </label>
-            <input type={ShowPass} className="inputs"  placeholder='Re-Enter Password' onChange={
+            <input type={ShowPass} className="inputs" autoComplete='' placeholder='Re-Enter Password' onChange={
               (e) => {
                 setRePass(e.target.value)
                 if (e.target.value === passUser) {
@@ -154,6 +156,7 @@ const [ExistEmail , setExistEmail] = useState("");
             {!validRePass && <h6>Passwords do not match</h6>}
             {/* <button type='button' onClick={handlePass} className="show">{PassState}</button> */}
           </span>
+          </form>
           {/* {shouldRedirect ? (
         <button type='submit' onClick={handleSignUp} className="btn btn1"><Link to="/">Signup</Link></button>
       ) : (

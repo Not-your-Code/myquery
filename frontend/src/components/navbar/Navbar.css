@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Alkatra&display=swap');
 nav{
     width: 100vw;
  
@@ -48,10 +48,9 @@ ul>li{
 .rightNav{
  
     margin-left: 30px;
-   
-    color: black;
+    font-family: 'Alkatra', cursive;
+    color: white;
   
-   font-family: 'Noto Sans', sans-serif;
    
 }
 
