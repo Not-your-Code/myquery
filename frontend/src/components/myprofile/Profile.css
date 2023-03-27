@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+.profileContainer{
+    border: 1px solid rgb(202, 202, 202);
+    position: relative;
+    top: 150px;
+    width: 50%;
+    height: 550px;
+    margin: auto;
+    border-radius: 30px  10px  30px 10px;
+    background-color: rgba(204, 204, 204, .8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profileContent{
+    border:1px solid red;
+    height: 90%;
+}
+.profileTop{
+    height: 30%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+
+}
+
+#user{
+    display: flex;
+    justify-content: flex-start;
+    width: 30%;
+  
+    align-items: center;
+}
+
+#user>img{
+    height: 60px;
+    width: 60px;
+    margin-bottom: 20px;
+}
+#name{
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    flex-direction: column;
+  margin-left: 20px;
+  justify-content: flex-start;
+  align-items: start;
+}
+
+#username{
+    font-size: 20px;
+}
+
+#status{
+    font-weight: lighter;
+}
+
