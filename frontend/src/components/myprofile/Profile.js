@@ -13,21 +13,55 @@ export default function Profile() {
   const [passUser, setPassUser] = useState("")
   const [rePass, setRePass] = useState(1)
 
-const[option , setOption] = useState(false)
+ 
+  const [isAdmin , setIsAdmin] =useState("")
 
+
+const [approval , setApproval] = useState(false)
+const[AdminClick , setAdminClick] = useState(false)
+const [QuestionClick , setQuestionClick] = useState(false)
+const [detail , setHandleDetail ] = useState(true)
   const setDetails = (res) => {
     setName(res.data.name)
-    setRole(res.data.designation)
+    setRole(res.data.Role)
     setEmail(res.data.email)
     setPassUser(res.data.password)
-
-
   }
-
+//handleing the content of profiles 
   const handleAdminClick = ()=>{
-    setOption(!option)
+    setHandleDetail(false)
+    setApproval(false)
+    setQuestionClick(false)
+    setAdminClick(!AdminClick)
+    
   
   }
+ const handleAprovalClick = ()=>{
+  setHandleDetail(false)
+  setAdminClick(false)
+  setQuestionClick(false)
+  setApproval(!approval)
+ 
+ }
+ const handelQuestionClick = ()=>{
+  setHandleDetail(false)
+  setAdminClick(false)
+  setApproval(false)
+  setQuestionClick(!QuestionClick)
+ 
+ }
+
+ const handelDetailClick = ()=>{
+  setAdminClick(false)
+  setApproval(false)
+  setQuestionClick(false)
+   setHandleDetail(true)
+
+ }
+
+ //handleing the content of profiles *//
+
+
   const handleProfile = async () => {
 
     try {
@@ -43,8 +77,18 @@ const[option , setOption] = useState(false)
 
   }
 
+
+  const checkIsAdmin = ()=>{
+    let check = Cookies.get('Role')
+    if(check ==="Admin"){
+      setIsAdmin(true)
+    }else{
+      setIsAdmin(false)
+    }
+  }
   useEffect(() => {
     handleProfile()
+    checkIsAdmin()
   })
 
 
@@ -61,15 +105,23 @@ const[option , setOption] = useState(false)
         </div>
         <ul id='optList'>
          
-            <li className="listPro">
+            <li className="listPro" onClick={handelDetailClick}>
             Details
             </li>
-            <li className="listPro">
+            <li className="listPro" onClick={handelQuestionClick}>
             Add Question
             </li>
-            <li className="listPro" onClick={handleAdminClick} >
-            Become Admin 
-            </li>
+            {
+              isAdmin ? 
+              <li className='listPro' onClick={handleAprovalClick}>
+                Approvals
+              </li>
+              
+              :  <li className="listPro" onClick={handleAdminClick} >
+              Become Admin 
+              </li>
+            }
+          
           
         </ul>
         <div id="logout">
@@ -82,8 +134,17 @@ const[option , setOption] = useState(false)
 
       </div>
       <div id='proRight'>
+        {
+          detail ? <div>details</div> :""
+        }
+        {
+          QuestionClick ? <div>Add Question</div>:""
+        }
       {
-       option ? "":<Admin/> 
+       isAdmin||AdminClick ? "":<Admin setIsAdmin={setIsAdmin}/> 
+      }
+      {
+        approval ? <div>approvlas</div> :""
       }
 
       </div>

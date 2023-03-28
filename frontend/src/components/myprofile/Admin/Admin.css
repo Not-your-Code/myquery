@@ -1,7 +1,19 @@
-.AdminCont{
-    border: 1px solid red;
+.AdminCont {
     margin-left: 40px;
     height: 350px;
     width: 550px;
-    
+}
+
+.AdminInput {
+    width: 600px;
+}
+
+.AdminForm {
+    /* border: 1px solid red; */
+    position: relative;
+    top: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    left: -14px;
 }

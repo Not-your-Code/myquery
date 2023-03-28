@@ -50,7 +50,7 @@ useEffect(()=>{
                   
                     Cookies.set('sessionId' , res.data.sessionId , {expires:100})
                     Cookies.set('user' , name , {expires:100})
-                   
+                     Cookies.set('Role' , res.data.role , {expires:100})
                    setisLoggedIn();
               
                 //   console.log(res.data.sessionId)

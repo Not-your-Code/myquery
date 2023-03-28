@@ -2,13 +2,15 @@ import React from 'react'
 import './User.css'
 import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
+
 export default function User(props) {
+    let role = Cookies.get('Role')
     return (
         <div className='userProfile'>
             <div className='user'>
            
                 <h3>{props.user.charAt(0).toUpperCase()+props.user.slice(1) }</h3>
-                <span className='role'>User</span>
+                <span className='role'>{role}</span>
            
                 </div><div className='menu'>
                  <ul className='userlist'>
