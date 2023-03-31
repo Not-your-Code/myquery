@@ -8,7 +8,7 @@
   background: rgb(71,107,255);
   background: -moz-linear-gradient(120deg, rgba(71,107,255,1) 51%, rgba(255,255,255,1) 51%);
   background: -webkit-linear-gradient(120deg, rgba(71,107,255,1) 51%, rgba(255,255,255,1) 51%);
-  background: linear-gradient(120deg, rgba(71,107,255,1) 51%, rgba(255,255,255,1) 51%);
+  background: linear-gradient(120deg, rgba(71,107,255 ,1) 51%, rgba(255,255,255,1) 51%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#476bff",endColorstr="#ffffff",GradientType=1);
 }
 

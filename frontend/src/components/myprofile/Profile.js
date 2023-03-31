@@ -2,6 +2,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import AddQuestion from '../Add/QuestionPanel/AddQuestion'
 import Admin from './Admin/Admin'
 import './Profile.css'
 
@@ -32,7 +33,7 @@ const [detail , setHandleDetail ] = useState(true)
     setHandleDetail(false)
     setApproval(false)
     setQuestionClick(false)
-    setAdminClick(!AdminClick)
+    setAdminClick(true)
     
   
   }
@@ -40,14 +41,14 @@ const [detail , setHandleDetail ] = useState(true)
   setHandleDetail(false)
   setAdminClick(false)
   setQuestionClick(false)
-  setApproval(!approval)
+  setApproval(true)
  
  }
  const handelQuestionClick = ()=>{
   setHandleDetail(false)
   setAdminClick(false)
   setApproval(false)
-  setQuestionClick(!QuestionClick)
+  setQuestionClick(true)
  
  }
 
@@ -138,7 +139,7 @@ const [detail , setHandleDetail ] = useState(true)
           detail ? <div>details</div> :""
         }
         {
-          QuestionClick ? <div>Add Question</div>:""
+          QuestionClick ? <div><AddQuestion/></div>:""
         }
       {
        isAdmin||AdminClick ? "":<Admin setIsAdmin={setIsAdmin}/> 
