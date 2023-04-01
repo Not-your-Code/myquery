@@ -1,0 +1,40 @@
+.list{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+   
+    margin:0;
+}
+
+#rightList{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+h5{
+    font-size: 15px;
+
+}
+
+.ListCont{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#leftList{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.Listbtn{
+    background-color: transparent;
+    border: none;
+    
+    border: 1px solid rgb(165, 165, 165);
+
+}

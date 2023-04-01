@@ -1,6 +1,6 @@
 import React from 'react'
 import './CatNA.css'
-export default function 
+export default function CatNa
 (props) {
   return (
     <div className='CatNaCont'>

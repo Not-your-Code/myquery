@@ -1,0 +1,15 @@
+.hello{
+    
+    height: 400px;
+    width: 639px;
+    margin-top: 10px;
+    padding: 5px 10px 0px 10px;
+    overflow:hidden;
+}
+
+.listItem{
+   
+   border-bottom: 1px solid rgb(175, 175, 175);
+    height: 100px;
+    padding: 5px;
+}
