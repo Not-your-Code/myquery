@@ -142,7 +142,9 @@ const [detail , setHandleDetail ] = useState(true)
           QuestionClick ? <div><AddQuestion/></div>:""
         }
       {
-       isAdmin||AdminClick ? "":<Admin setIsAdmin={setIsAdmin}/> 
+       isAdmin ? "":(
+        AdminClick ? <Admin setIsAdmin={setIsAdmin}/>  :""
+       )
       }
       {
         approval ? <div>approvlas</div> :""
