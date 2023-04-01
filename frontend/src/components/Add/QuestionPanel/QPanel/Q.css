@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+.QuestionCont{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap:10px
+}
+
+#formQuestion{
+    display: flex;
+    flex-direction: column;
+   
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    height: 100%;
+    width: 100%;
+}
+#question{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+.btn1{
+    width: 180px;
+}
+
+.btn1:hover{
+    background-color: green;
+    color:white;
+    transition: .25s ease-in-out;
+}
+
+#formQuestion> select , textarea{
+    border:1px solid rgb(100, 100, 100);
+   width: 500px;
+   padding: 10px;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   border-radius: 10px;
+
+}
+
+
+.AddCat{
+    
+    position: relative;
+    right: -40%;
+    top: -10px;
+    
+    font-family: 'Noto Sans', sans-serif;
+  
+}
+
+
+.addCat{
+    border: none;
+    background-color: transparent;
+    color: blue;
+}
+
+
+

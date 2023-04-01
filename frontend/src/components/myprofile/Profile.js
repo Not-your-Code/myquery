@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import AddQuestion from '../Add/QuestionPanel/AddQuestion'
 import Admin from './Admin/Admin'
 import './Profile.css'
+import Approvals from '../Add/QuestionPanel/Approvals/Approvals'
 
 export default function Profile() {
 
@@ -106,19 +107,19 @@ const [detail , setHandleDetail ] = useState(true)
         </div>
         <ul id='optList'>
          
-            <li className="listPro" onClick={handelDetailClick}>
+            <li key="1" className="listPro" onClick={handelDetailClick}>
             Details
             </li>
-            <li className="listPro" onClick={handelQuestionClick}>
+            <li key="3" className="listPro" onClick={handelQuestionClick}>
             Add Question
             </li>
             {
               isAdmin ? 
-              <li className='listPro' onClick={handleAprovalClick}>
+              <li key="4" className='listPro' onClick={handleAprovalClick}>
                 Approvals
               </li>
               
-              :  <li className="listPro" onClick={handleAdminClick} >
+              :  <li  key="5" className="listPro" onClick={handleAdminClick} >
               Become Admin 
               </li>
             }
@@ -147,7 +148,7 @@ const [detail , setHandleDetail ] = useState(true)
        )
       }
       {
-        approval ? <div>approvlas</div> :""
+        approval ? <div><Approvals/></div> :""
       }
 
       </div>

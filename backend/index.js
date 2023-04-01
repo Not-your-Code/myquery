@@ -250,13 +250,33 @@ app.post("/addQuestion", async (req, res) => {
                     approved:approved
                 })
 
-                newQ.save().then((res)=>{
-                  res.json({message:"Created"})
-                }).catch((e)=>{ 
-                    res.json({message:"Error"})
+                newQ.save().then(()=>{
+                    console.log("saved")
+                res.json({message:"created"})
                 })
             }
         } catch (e) { }
+    }
+    execute()
+})
+
+//approvals ( approved == false) only fetch
+
+app.get("/approve" , async(req,res)=>{
+    async function execute(){
+        try{
+   
+             const data= await Questions.find({approved:false}).limit(4)
+
+             if(data){
+                res.json({response:data})
+             }else{
+                console.log({response:"NA"})
+             }
+        }
+        catch(e){
+            console.log(e)
+        }
     }
     execute()
 })

@@ -35,7 +35,7 @@ export default function AddQuestion() {
 {
   AddCat ?
   < Category/> : (
-  CatAvailable ? <QuestionAdd cats = {cats}/> : <CatNa setAddCat={setAddCat}/> )
+  CatAvailable ? <QuestionAdd cats = {cats} setAddCat={setAddCat}/> : <CatNa setAddCat={setAddCat}/> )
 
 }
  
