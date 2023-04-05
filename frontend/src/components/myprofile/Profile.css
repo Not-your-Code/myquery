@@ -2,6 +2,7 @@
 
 .profileCont {
     display: flex;
+    z-index: 2;
     align-items: center;
     /* gap: 20px;     */
     height: 400px;

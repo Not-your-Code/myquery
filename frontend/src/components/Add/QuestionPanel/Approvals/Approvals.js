@@ -18,19 +18,19 @@ export default function Approvals() {
     // const[AppQuestion , setAppQuestion] = useState(null)
     // const[AppCat , setAppQuestionCat] = useState(null)
     const[isDataChanged , setIsDataChanged ] = useState(false)
-    const [isDeleted , setIsdelete] = useState(0)
-    const [isApp , setIsApp] = useState(0)
+    // const [isDeleted , setIsdelete] = useState(0)
+    // const [isApp , setIsApp] = useState(0)
 //--------------------------------------------------------------
    const deleteApproval = async(deleteQuestion , deleteCat)=>{
        try{
        
-       await axios.post('http://localhost:8000/delete' ,{
+        axios.post('http://localhost:8000/delete' ,{
                 Question:deleteQuestion ,
                 Category:deleteCat
         }).then((res)=>{
-          
+            fetchToBeApproved()
            setIsDataChanged(!isDataChanged)
-           setIsdelete(isDeleted+1)
+        
         }).catch((e)=>{
             console.log(e)
         })
@@ -49,12 +49,12 @@ export default function Approvals() {
 //--------------------------------------------------------------
 const ApproveApproval = async (AppQuestion , AppCat)=>{
     try{
-        console.log("in")
-       await axios.post('http://localhost:8000/approveit' ,{
+       
+        axios.post('http://localhost:8000/approveit' ,{
                 Question:AppQuestion ,
                 Category:AppCat
         }).then((res)=>{
-            
+           fetchToBeApproved()
             setIsDataChanged(!isDataChanged)
         }).catch((e)=>{
             console.log(e)
@@ -71,17 +71,17 @@ const ApproveApproval = async (AppQuestion , AppCat)=>{
 //    },[AppQuestion])
 
 
-    const fetchToBeApproved = async () => {
+    const fetchToBeApproved = () => {
         try {
            setIsLoading(true)
-            await axios.get('http://localhost:8000/Approve', {}).then((res) => {
+           axios.get('http://localhost:8000/Approve', {}).then((res) => {
                 
                 setQuestionTobeApproved(res.data.response)
                 if(res.data.response.length==0){
                     setIsData(false)
                     setIsLoading(false)
                 }
-                console.log(res.data.response)
+                
                 setIsLoading(false)
             }).catch((e) => {
                 console.log(e)

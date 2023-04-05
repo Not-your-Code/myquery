@@ -9,6 +9,8 @@ export default function AddQuestion() {
   const [AddCat, setAddCat] = useState(false)
   const [CatAvailable , setIsCatAvailable] = useState(false)
   const [cats , setCats] = useState({})
+
+  const [catAcess , setCatAcess] = useState(false)
   //useeffect to fetch if there is catgory that exists , if yes render () if not render (AddCat)
   useEffect(()=>{
     fetch();
@@ -21,6 +23,7 @@ export default function AddQuestion() {
      .then((res)=>{
      
       setIsCatAvailable(true)
+      setCatAcess(true)
       setCats(res.data.result)
     
     }).catch((res) => {
@@ -35,13 +38,13 @@ export default function AddQuestion() {
 {
   AddCat ?
   < Category/> : (
-  CatAvailable ? <QuestionAdd cats = {cats} setAddCat={setAddCat}/> : <CatNa setAddCat={setAddCat}/> )
+  CatAvailable ? <QuestionAdd cats = {cats} setAddCat={setAddCat} catAccess={catAcess}/> : <CatNa setAddCat={setAddCat}/> )
 
 }
  
    
-       
-     
+{/*        
+     jsx - js and html */}
 
 
     </div>

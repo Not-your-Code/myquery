@@ -7,7 +7,7 @@
 const express = require('express')
 const cors = require('cors')
 
-const  ObjectID = require('mongodb').ObjectId
+const ObjectID = require('mongodb').ObjectId
 const mongoose = require('mongoose')
 const { v4: uuidv4 } = require('uuid')
 const app = express()
@@ -61,8 +61,8 @@ const QuestionSchema = new mongoose.Schema({
         type: Boolean,
 
     },
-    questionId:{
-        type:String,
+    questionId: {
+        type: String,
     }
 })
 //   user model made
@@ -226,7 +226,7 @@ app.get("/getCategory", async (req, res) => {
             } else {
                 res.json({ message: "NA" })
             }
-            
+
         } catch (e) {
             console.log(e)
         }
@@ -240,29 +240,29 @@ app.get("/getCategory", async (req, res) => {
 
 app.post("/addQuestion", async (req, res) => {
     async function execute() {
-        
-        try {
-           const {question , user , approved  , selectedCat} = req.body
-         console.log(question , user , approved , selectedCat)
-           const check = await Questions.findOne({Question:question , Category:selectedCat})
-            if(check){
-                res.json({message:"Question Exists already"})
-            }else{
-                
 
-// const result = Math.random().toString(36).substring(2,7);
+        try {
+            const { question, user, approved, selectedCat } = req.body
+            console.log(question, user, approved, selectedCat)
+            const check = await Questions.findOne({ Question: question, Category: selectedCat })
+            if (check) {
+                res.json({ message: "Question Exists already" })
+            } else {
+
+
+                // const result = Math.random().toString(36).substring(2,7);
 
                 const newQ = new Questions({
-                    Question : question ,
-                    CreatedBy : user,
-                    Category:selectedCat,
-                    approved:approved,
+                    Question: question,
+                    CreatedBy: user,
+                    Category: selectedCat,
+                    approved: approved,
                     questionId: uuidv4(),
                 })
 
-                newQ.save().then(()=>{
+                newQ.save().then(() => {
                     console.log("saved")
-                res.json({message:"created"})
+                    res.json({ message: "created" })
                 })
             }
         } catch (e) { }
@@ -272,68 +272,87 @@ app.post("/addQuestion", async (req, res) => {
 
 //approvals ( approved == false) only fetch
 
-app.get("/approve" , async(req,res)=>{
-    async function execute(){
-        try{
-   
-             const data= await Questions.find({approved:false}).limit(4)
+app.get("/approve", async (req, res) => {
+    async function execute() {
+        try {
 
-             if(data){
-                res.json({response:data})
-             }else{
-                console.log({response:"NA"})
-             }
+            const data = await Questions.find({ approved: false }).limit(4)
+
+            if (data) {
+                res.json({ response: data })
+            } else {
+                console.log({ response: "NA" })
+            }
         }
-        catch(e){ 
+        catch (e) {
             console.log(e)
         }
-    } 
+    }
     execute()
 })
 
-app.post("/delete" , async(req,res)=>{
+app.post("/delete", async (req, res) => {
 
-    async function execute(){
-        try{
-           const {Question, Category} = req.body 
-            
-           const data = await Questions.deleteOne({Question:Question , Category:Category})
-           
-   
-        //     const objectId = new ObjectID(id)  
-        //    const da  ta = await Questions.findOne({_id:objectId})
-        //     console.log(data)
+    async function execute() {
+        try {
+            const { Question, Category } = req.body
+
+            const data = await Questions.deleteOne({ Question: Question, Category: Category })
+
+
+            //     const objectId = new ObjectID(id)  
+            //    const da  ta = await Questions.findOne({_id:objectId})
+            //     console.log(data)
         }
-        catch(e){
-            console.log(e) 
+        catch (e) {
+            console.log(e)
         }
     }
-    execute() 
+    execute()
 })
 
-app.post("/approveit" , async(req,res)=>{
+app.post("/approveit", async (req, res) => {
 
-    async function execute(){
-        try{
+    async function execute() {
+        try {
             // const updateProfile = await User.findOneAndUpdate({ name: user, password: pass }, { Role: "Admin" }, { new: true })
-           const {Question, Category} = req.body 
-      
-           const data = await Questions.findOneAndUpdate({Question:Question , Category:Category}, {approved:"true"},{new:true})
-           if (data) {
-            res.json({ message: "success"})
-        } else {
-         
+            const { Question, Category } = req.body
+
+            const data = await Questions.findOneAndUpdate({ Question: Question, Category: Category }, { approved: "true" }, { new: true })
+            if (data) {
+                res.json({ message: "success" })
+            } else {
+
+            }
+
+
         }
-        
-    
-        }
-        catch(e){
-            console.log(e) 
+        catch (e) {
+            console.log(e)
         }
     }
-    execute() 
+    execute()
 })
 
+//getAllQuestionMatchinTheQuery
+
+app.get("/getQuery", async (req, res) => {
+    try {
+        const { term } = req.query;
+        const searchWord = term;
+        const searchRegex = new RegExp(searchWord, 'i') ;
+        Questions.find({ Question: searchRegex , approved:true}).then((response) => {
+            res.json({response:response})
+         
+        }).catch((e)=>[
+            res.json({response:"NA"})
+        ])
+      
+       
+    } catch (e) {
+        console.log(e);
+    }
+});
 
 
 app.listen(8000, () => {
