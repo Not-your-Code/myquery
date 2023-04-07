@@ -4,6 +4,7 @@
   height: 100vh;
   overflow: hidden;
   font-weight: bold;
+  user-select: nonelll;
   z-index: 1;
   background: rgb(71,107,255);
   background: -moz-linear-gradient(120deg, rgba(71,107,255,1) 51%, rgba(255,255,255,1) 51%);

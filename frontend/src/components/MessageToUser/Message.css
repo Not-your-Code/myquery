@@ -1,0 +1,22 @@
+#messageCont{
+     border-radius: 8px;
+    position: relative;
+    top: 200px; 
+    width: 300px;
+    background-color: rgb(202, 202, 202);
+    color: rgb(56, 56, 56);
+    margin:auto;
+    padding-top: 7px;
+    /* display: grid;
+    place-items: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    cursor: none; 
+
+    /* animation: fade 0.5s 0 0 1 ; */
+}
+
+
+

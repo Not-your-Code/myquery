@@ -1,32 +1,37 @@
-import React,{useState} from 'react'
+import React,{useState , useEffect } from 'react'
 import './Home.css'
 import Login from '../loginPortal/Login/Login'
-
 import Navbar from '../navbar/Navbar'
 import Main from '../Main/Main'
+import Cookies from 'js-cookie'
+
+
 export default function Home() {
+
   const[loggedIn , setLoggedIn] = useState(false)
   const [User , setUser] = useState(null)
-  const[accessProfile ,setProfile]  = useState(false)
-  
+ 
+  let sessionId = Cookies.get('sessionId')
+
+  const setIsloggedIn=  ()=>{
+    if(sessionId != null){
+      setLoggedIn(true)
+    }
+  }
+
+  useEffect(()=>{ 
+    setIsloggedIn();
+  },[])
   return (
-    <div className='main'>
-      <nav>
-        <Navbar userName={User} setProfile={setProfile} profile={accessProfile}/>
-      </nav>
+
       
      <div>
-      {loggedIn ? 
-      <Main ProfileAccess = {accessProfile} /> :
-      (   <><div>
-              <Login setLoggedIn={setLoggedIn} setUser={setUser} />
-            </div></>
-      )
+      {loggedIn ? <Main /> : <Login setLoggedIn={setIsloggedIn} setUser={setUser} />
       }
       
      </div>
    
   
-    </div>
+ 
   )
 }

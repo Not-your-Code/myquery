@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import './Sign.css'
 import { Link, useNavigate, useHref } from 'react-router-dom';
 import axios from 'axios'
 import Navbar from '../../navbar/Navbar';
+import Message from '../../MessageToUser/Message';
+
+
 export default function Sign() {
 
 
@@ -11,7 +14,7 @@ export default function Sign() {
   const [ShowPass, setShowPass] = useState("password");
   const [PassState, setPass] = useState("Show");
   const[res , setRes] = useState("")
-  const[message , setMessage] = useState("")
+
 
   const [Signed , setSigned] = useState(false);
   //signup fields
@@ -26,9 +29,11 @@ export default function Sign() {
   const [validRePass, setValidRePass] = useState(true)
 
 //exists
-const [ExistName , setExistName] = useState("");
-const [ExistEmail , setExistEmail] = useState("");
+const [ExistName , setExistName] = useState(null);
+const [ExistEmail , setExistEmail] = useState(null);
+///
 
+const [isError , setIsError] = useState("")
   //will work later on
   const handlePass = () => {
     if (ShowPass === "text") {
@@ -41,43 +46,37 @@ const [ExistEmail , setExistEmail] = useState("");
   }
 
 
-  const handleSignUp = async () => {
-    if (validEmail && validName && validPass && validRePass) {
-      try {
-        await axios.post("http://localhost:8000/signup", { name, email, passUser }).then((res) => {
-          console.log(res.data.message)
-          // setShouldRedirect(true)
-         
-          if(res.data.message === "Email Already Exists" ){
-
-             setSigned(false)
-             setExistName(null)
-            setExistEmail(res.data.message)
-
-          }else if( res.data.message === "Name Already Exists"){
-            setSigned(false)
-            setExistName(res.data.message)
-            setExistEmail(null)
-          }else{
-            setRes(true)
-            setSigned(true)
-            setExistName(null)
-            
-            setExistEmail(null)
-          }
-         
-        })
-      } catch (e) {
-        console.log(e)
-      }
-    } else {
-   
-      setRes(true)
-      setMessage("Validation Failed , Try Again !")
-      console.log("Validation Failed , Try Again !")
+  useEffect(()=>{
+    setTimeout(()=>{
+        setIsError(null)
     }
+        
+        ,5000)
+    },[isError])
 
-  }
+    const handleSignUp = async () => {
+      if (validEmail && validName && validPass && validRePass) {
+        try {
+          const response = await axios.post("http://localhost:8000/signup", { name, email, passUser });
+          if (response.data.response === "Email Already Exists") {
+            setSigned(false);
+            setIsError("Retry");
+            setExistEmail(response.data.response);
+          } else if (response.data.message === "Name Already Exists") {
+            setSigned(false);
+            setExistName(response.data.message);
+          } else if (response.data.response === "ok") {
+            setSigned(true);
+            setIsError(false);
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      } else {
+        setIsError("Validation Failed, Try Again!");
+      }
+    };
+    
 
 
 
@@ -88,8 +87,8 @@ const [ExistEmail , setExistEmail] = useState("");
         <nav>
           <Navbar />
         </nav>
-     
-        <div className='form-container'>
+    
+        <div className='form-container1'>
         <div className='title'>
                     <h2 >Agent Signup </h2>
                     <p className='sub'>Hey ! Signup Below to proceed</p>
@@ -132,13 +131,13 @@ const [ExistEmail , setExistEmail] = useState("");
               (e) => {
                 setPassUser(e.target.value)
                 setValidPass(
-                  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(e.target.value)
+                  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/.test(e.target.value)
                 );
 
               }
             }></input>
             {/* <button type='button' onClick={handlePass} className="show">{PassState}</button> */}
-            {!validPass && <h6>Must Have One Upper Case , digits with 8 char long</h6>}
+            {!validPass && <h6>Should have Upper , lower , special and digits with 8 char longs</h6>}
           </span>
           < span>
             <label>Re-Enter Pass </label>
@@ -168,12 +167,14 @@ const [ExistEmail , setExistEmail] = useState("");
         {/* {isLogged|| error && <div className='message' >
                     <h5>{message}</h5>
                 </div>} */}
-    {res && <div className='message' >
-         {Signed ? (<div>
-            Signed UP ! Head to <Link to="/" >Login</Link>?
-         </div>):(<h5>{message}</h5>)}
+    {isError &&
+         <Message message={isError}/>}
                     
-                </div>}
+               
+
+                {
+                  Signed && <div className='message'>Signed UP ! Head to <Link to="/" >Login</Link>?</div>
+                }
       </div>
 
     </>

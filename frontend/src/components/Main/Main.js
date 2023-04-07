@@ -7,9 +7,10 @@ export default function Main(props) {
  
   return (
     <div>
-      {
+      {/* {
        props.ProfileAccess ? <Profile />: <MainQuestion />
-      }
+      } */}
+      <MainQuestion/>
     </div>
 
   )

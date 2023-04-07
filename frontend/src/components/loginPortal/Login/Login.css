@@ -54,7 +54,7 @@ span>input{
     outline :none;
 }
 
-.message{
+/* .message{
    
     position: absolute;
     margin: auto;
@@ -69,12 +69,12 @@ span>input{
     padding-top: 9px;
     border-radius: 10px;
     color: white;
-}
+} */
 
 
 
 .title>h1{
-    font-family: 'Sono', sans-serif;
+ 
     font-size: 80px;
     letter-spacing: 1px;
     position: relative;

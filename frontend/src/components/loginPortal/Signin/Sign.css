@@ -3,6 +3,22 @@
 }
 @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
 
+.form-container1{
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 500px;
+    height: 600px;
+    border-radius: 20px;
+    margin: auto;
+    position: relative;
+    top: 120px;
+    filter: drop-shadow(5px 5px 41px #000);
+  background-color: rgb(224, 224, 224);
+    color: black;
+}
 .title>h1{
     font-family: 'Sono', sans-serif;
     font-size: 80px;

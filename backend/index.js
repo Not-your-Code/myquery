@@ -79,40 +79,35 @@ mongoose.connect('mongodb://127.0.0.1:27017/myquery').then(() => console.log("co
 
 //signup code
 app.post("/signup", async (req, res) => {
-    async function execute() {
-        try {
-            const { email, passUser, name } = req.body
-            const CheckEmail = await User.findOne({ email: email, })
-            const CheckName = await User.findOne({ name: name })
-            if (!CheckEmail && !CheckName) {
-                const user = new User({
+  const { email, passUser, name } = req.body;
+  console.log("in")
 
-                    email: email,
-                    password: passUser,
-                    name: name,
-                    Role: "User",
-                })
+  const [checkEmail, checkName] = await Promise.all([
+    User.findOne({ email: email }),
+    User.findOne({ name: name })
+  ]);
 
-                user.save().then(() => {
-                    res.send({ message: "user registered", user })
-                }).catch((e) => {
-                    console.log('error', e.message)
-                })
-            }
-
-            if (CheckEmail) {
-                res.send({ message: "Email Already Exists" })
-            }
-            if (CheckName) {
-                res.send({ message: "Name Already Exists" })
-            }
-
-        } catch (e) { }
-    }
-
-    execute()
-})
-
+  if (checkEmail) {
+    res.send({ response: "Email Already Exists" });
+  } else if (checkName) {
+    res.send({ response: "Name Already Exists" });
+  } else {
+    const user = new User({
+      email,
+      password: passUser,
+      name,
+      Role: "User",
+    });
+    user
+      .save()
+      .then(() => {
+        res.send({ response: "ok", user });
+      })
+      .catch((e) => {
+        console.log("error", e.message);
+      });
+  }
+});
 
 
 

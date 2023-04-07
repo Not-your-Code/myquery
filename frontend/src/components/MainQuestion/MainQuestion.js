@@ -4,6 +4,7 @@ import axios from 'axios'
 import Loader from '../Loader/Loader'
 import { faSleigh } from '@fortawesome/free-solid-svg-icons'
 import QuestionList from '../QuestionList/QuestionList'
+import Navbar from '../navbar/Navbar'
 
 export default function MainQuestion() {
     const [term, setTerm] = useState("")
@@ -86,6 +87,10 @@ export default function MainQuestion() {
 
 
     return (
+        <div className='main'>
+            <nav>
+                <Navbar/>
+            </nav>
         <div className='MainCont'>
             <div className='title'>
             <h2>QueryHere</h2>
@@ -129,6 +134,7 @@ export default function MainQuestion() {
                     )
                 }
             </div>
+        </div>
         </div>
     )
 }
