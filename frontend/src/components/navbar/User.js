@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import './User.css'
-import {Link, NavLink} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 export default function User(props) {
     let role = Cookies.get('Role')
+    const navigate = useNavigate();
     const ref = useRef();
 
     useEffect(() => {
@@ -44,6 +45,8 @@ export default function User(props) {
                             Cookies.remove('sessionId')
                             Cookies.remove('user')
                             window.location.reload()
+                            navigate('/')
+                       
                         }}>Logout</Link>
                     </li>
                  </ul>

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 .form-container{
     display: flex;
     flex-direction: column;
@@ -27,6 +28,10 @@
     font-size: 50px;
     cursor: pointer;
 
+}
+
+input:focus{
+  border: 1px solid rgb(150, 150, 150);
 }
 
 span{
@@ -104,4 +109,14 @@ span>input{
   display: flex;
   flex-direction: column;
   gap: 18px;
+}
+
+
+.btn:focus{
+    filter: drop-shadow(5px 5px 41px #000);
+}
+
+#loader{
+    position: relative;
+    bottom: -200px;
 }

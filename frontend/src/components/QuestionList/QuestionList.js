@@ -1,7 +1,5 @@
 import React,{useState} from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faTrash , faCheck, faClipboard, faCopy } from '@fortawesome/free-solid-svg-icons'
 export default function QuestionList(props) {
   const[copied , setIsCopied] = useState(false)
   function handleClick(){
@@ -37,7 +35,7 @@ export default function QuestionList(props) {
             copied ? <label id='copied'>Copied</label> :""
            }
            </div>
-          <button onClick={handleClick} id='copyBtn'><FontAwesomeIcon icon={faCopy} /></button>
+          <button onClick={handleClick} id='copyBtn'>copy</button>
          
     </div>
   </div>

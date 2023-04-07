@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect , useRef } from 'react'
 import './Login.css'
 import { Link , useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import Message from '../../MessageToUser/Message';
 import Navbar from '../../navbar/Navbar';
+import Loader from '../../Loader/Loader';
 
 
 
 export default function Login(props) {
-
+    
+    const emailRef = useRef(null);
+    const passRef = useRef(null);
+    const loginRef = useRef(null)
     const navigate = useNavigate();
     const [ShowPass, setShowPass] = useState("password");
     const [PassState, setPass] = useState("Show");
@@ -17,8 +21,20 @@ export default function Login(props) {
     const [name, setName] = useState("")
     const [passUser, setPassUser] = useState("")
     const [res, setRes] = useState("")
-    let sessionId 
+    let sessionId = Cookies.get('sessionId')
+     
+   const [isLoading , setisLoading] = useState(false)
 
+    const handleKeyPress= (event , inputRef)=>{
+        if(event.key === 'Enter'){
+            inputRef.current.focus();
+        }
+    }
+    const handleLoginPress = (event)=>{
+        if(event.key === 'Enter'){
+            handleLogin();
+        }
+    }
     const handlePass = () => {
         if (ShowPass === "text") {
             setShowPass("password")
@@ -56,6 +72,9 @@ export default function Login(props) {
     // }, [])
 
     const handleLogin = async () => {
+        setisLoading(true)
+        await new Promise(resolve => setTimeout(resolve, 1000));
+       
         try {
             await axios.post('http://localhost:8000/login', {
                 name, passUser
@@ -65,11 +84,17 @@ export default function Login(props) {
                     Cookies.set('user', name, { expires: 100 })
                     Cookies.set('Role', res.data.role, { expires: 100 })
                     navigate('/home')
-                    window.location.reload()
                     setisLoggedIn();
+                    setisLoading(false)
+                    window.location.reload()
+                    
+                    
 
                 } else {
                     setRes("Incorrect Username Or Password")
+                    setName("")
+                    setPassUser("")
+                    setisLoading(false)
                 }
 
             })
@@ -95,29 +120,38 @@ export default function Login(props) {
                     <span>
 
                         <label>Username </label>
-                        <input type="text" placeholder='Enter Username' onChange={
-                            (e) => {
+                        <input value={name} ref={emailRef}type="text" placeholder='Enter Username' 
+                        onChange={(e) => {
                                 setName(e.target.value)
-                            }
-                        }></input>
+                            }}
+                        onKeyDown={(event)=>handleKeyPress(event , passRef)}
+                            ></input>
                     </span>
                     <span>
                         <label>Pass </label>
-                        <input type={ShowPass} autoComplete="" placeholder='Enter Password' onChange={
+                        <input type={ShowPass} value={passUser}ref={passRef} autoComplete="" placeholder='Enter Password' onChange={
                             (e) => {
                                 setPassUser(e.target.value)
                             }
-                        }></input>
+                        }
+                        
+                        onKeyDown={(event)=>handleKeyPress(event , loginRef)}
+                        ></input>
                     </span>
                 </form>
                 {/* <button type='button' onClick={handlePass} className="show">{PassState}</button> */}
-                <button type='submit' onClick={handleLogin} className="btn">Login</button>
+                <button ref={loginRef} type='submit' onClick={handleLogin} className="btn" 
+                onKeyDown={(event)=>handleLoginPress(event)}
+                >Login</button>
                 <div className='bottom'>
                     <h5>Dont have a account ?<Link to="/signup" > Signup</Link></h5>
                 </div>
             </div>
             {res &&
                 <Message message={res} />
+            }
+            {
+                isLoading && <div id='loader'><Loader/></div>
             }
 
 </div>

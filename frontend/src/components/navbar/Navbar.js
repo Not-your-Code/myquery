@@ -14,11 +14,10 @@ export default function Navbar(props) {
     <div className='nav'>
       <nav>
         <div className='rightNav'>
-          <h2>QueryHere</h2>
+          <h2 id='title'>QueryHere</h2>
         </div>
         <div className='LeftNav'>
-          <ul className='items'>
-            <li className='login'>
+       
               {/* if user is present it will show the profile icon or login / signup button  */}
             {
               user ? 
@@ -29,13 +28,12 @@ export default function Navbar(props) {
                     {clickedPro ? <User user={user} setClickedPro={setClickedPro}/> : ""}
                 </>
                   :
-                   <div>
-                      < button className="navbar-btn" ><Link style={{ color: "black" }} to="/login"> Login</Link></button>
-                      <button className="navbar-btn" ><Link style={{ color: "black", filter: "drop-shadow(5px 5px 10px #000)" }} to="/signup" >Signup</Link></button>
+                   <div id='login-signup'>
+                      <button className="navbar-btn" ><Link style={{ color: "black" }} to="/login"> Login</Link></button>
+                      <button className="navbar-btn" ><Link style={{ color: "black" }} to="/signup" >Signup</Link></button>
                    </div>
             }
-            </li>
-          </ul>
+          
         </div>
       </nav>
     </div>

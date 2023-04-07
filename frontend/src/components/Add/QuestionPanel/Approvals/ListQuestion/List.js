@@ -2,9 +2,7 @@ import React from 'react'
 import './List.css'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faTrash , faCheck } from '@fortawesome/free-solid-svg-icons'
 
 export default function List(props) {
 
@@ -40,8 +38,8 @@ export default function List(props) {
       </div>
 
       <div id='leftList'>
-        <button className='Listbtn' onClick={handleDelete}><FontAwesomeIcon icon={faTrash} /></button>
-        <button className='Listbtn' onClick={handleApprove}><FontAwesomeIcon icon={faCheck} /></button>
+        <button className='Listbtn' onClick={handleDelete}>Delete</button>
+        <button className='Listbtn' onClick={handleApprove}>Approve</button>
       </div>
     </div>
   )

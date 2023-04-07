@@ -2,7 +2,7 @@ import React, { useState, useEffect ,useRef } from 'react'
 import './MainQ.css'
 import axios from 'axios'
 import Loader from '../Loader/Loader'
-import { faSleigh } from '@fortawesome/free-solid-svg-icons'
+
 import QuestionList from '../QuestionList/QuestionList'
 import Navbar from '../navbar/Navbar'
 

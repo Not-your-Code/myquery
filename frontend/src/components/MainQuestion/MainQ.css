@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
 .MainCont{
     
     height: 80vh;
@@ -39,7 +41,7 @@
 }
 
 .title>h2{
-    font-family: 'Alkatra', cursive;
+    font-family: 'Roboto Mono', monospace;
     color: rgb(71,107,255);
     margin:10px;
 }
